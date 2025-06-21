@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="timer-display">
+            <div class="time-input">
+                <button class="time-adjust-btn" id="add-minute">+</button>
+                <input type="number" id="display-hours" min="0" max="99" value="00" readonly>
+                <span>:</span>
+                <input type="number" id="display-minutes" min="0" max="59" value="00" readonly>
+                <span>:</span>
+                <input type="number" id="display-seconds" min="0" max="59" value="00" readonly>
+                <button class="time-adjust-btn" id="subtract-minute">-</button>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="start-stop">開始</button>
+            <button id="reset">リセット</button>
+        </div>
+        <audio id="alarm-sound" src="audio/alarm.mp3"></audio>
+    </div>
+    <script src="js/timer.js"></script>
+</body>
+</html>
