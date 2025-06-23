@@ -47,11 +47,11 @@ const timerApp = {
     const params = this.getQueryParams();
     if (params.seconds) {
       const defaultTime = parseInt(params.seconds, 10);
-      if (!isNaN(defaultTime) && defaultTime > 0) {
+      if (!isNaN(defaultTime) && defaultTime > 0 && defaultTime <= 86400) {
         this.timeLeft = defaultTime;
+        this.displayTime(this.timeLeft);
+        this.totalTime = this.timeLeft;
       }
-      this.displayTime(this.timeLeft);
-      this.totalTime = this.timeLeft;
     }
   },
 
@@ -61,7 +61,16 @@ const timerApp = {
     const queries = queryString.split("&");
     queries.forEach(query => {
       const [key, value] = query.split("=");
-      params[key] = decodeURIComponent(value);
+      if (key && value) {
+        try {
+          const decodedValue = decodeURIComponent(value);
+          if (key === 'seconds' && /^\d+$/.test(decodedValue)) {
+            params[key] = decodedValue;
+          }
+        } catch (e) {
+          console.warn('Invalid query parameter:', key, value);
+        }
+      }
     });
     return params;
   },
